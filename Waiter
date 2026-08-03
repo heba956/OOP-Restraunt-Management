@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+public class Waiter extends Staff{
+    private List<Table>assignedTables;
+    public Waiter(String username, String password, int workingHours, Date DateOfBirth){
+        super(username, password, Role.WAITER, workingHours, DateOfBirth);
+        this.assignedTables=new ArrayList<>();}
+    public List<Table> getAssignedTables() {
+        return assignedTables;
+    }
+
+    public void assignTable(Table table) {
+        assignedTables.add(table);
+    }
+    public void takeOrder(Order order){
+        Database.orders.add(order);
+    }
+    public void updateOrderStatus(Order order, Order.OrderStatus newStatus) {
+        order.setStatus(newStatus);
+    }
+
+    public void manageSeating(Table table) {
+        if (assignedTables.contains(table)) {
+            table.setStatus(Table.TableStatus.OCCUPIED);
+        }
+    }
+
+    public void checkOutTable(Table table) {
+        if (assignedTables.contains(table)) {
+            table.setStatus(Table.TableStatus.AVAILABLE);
+        }
+    }
+}
