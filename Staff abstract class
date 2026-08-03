@@ -1,0 +1,79 @@
+import java.util.Date;
+import java.util.List;
+public abstract class Staff {
+    public enum Role {
+        ADMIN, WAITER;
+    }
+    private String username;
+    private String password;
+    private Role role;
+    private int workingHours;
+    private Date DateOfBirth;
+    public  Staff(String username,String password,Role role,int workingHours,Date dateOfBirth){
+        this.username=username;
+        this.password=password;
+        this.role=role;
+        this.workingHours=workingHours;
+        this.DateOfBirth=dateOfBirth;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String password){
+        this.password=password;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+    public void setWorkingHours(int workingHours) {
+        this.workingHours = workingHours;
+    }
+
+    public int getWorkingHours() {
+        return workingHours;
+    }
+
+    public void setDateOfBirth(Date DateOfBirth) {
+        this.DateOfBirth = DateOfBirth;
+    }
+
+    public Date getDateOfBirth() {
+        return DateOfBirth;
+    }
+
+    public void viewAllCustomers(List<Customer> customers) {
+        for (int i = 0; i < customers.size(); i++) {
+            Customer c = customers.get(i);
+            System.out.println(c.getUsername() + ", " + c.getDateOfBirth() + ", " +
+                    c.getBalance() + ", " + c.getLoyaltyPoints() + ", " + c.getDietaryPreference());
+        }
+    }
+
+
+    public void viewAllReservations(List<Reservation> reservations){
+    for(int i =0 ;i <reservations.size();i++){
+        Reservation r = reservations.get(i);
+        System.out.println(r.getCustomer() + ", " + r.getTable()+", " +r.getDate()+", " +r.getPartySize());
+    }
+    }
+    public void viewAllTables(List<Table> tables){
+        for(int i =0 ;i <tables.size();i++){
+            Table t = tables.get(i);
+            System.out.println(t.getTableType());
+        }
+    }
+}
