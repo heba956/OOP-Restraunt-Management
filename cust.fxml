@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="601.0" prefWidth="706.0" spacing="0" style="-fx-background-color: white;"
+      BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projecttry1.CustDashboardController">
+    <children>
+
+        <ImageView fitHeight="102.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo.jpeg" />
+         </image>
+         <VBox.margin>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </VBox.margin>
+        </ImageView>
+
+        <!-- PROFILE WIDGET -->
+        <VBox alignment="CENTER" prefHeight="133.0" prefWidth="706.0" spacing="4" style="-fx-padding: 10 0 15 0;">
+            <children>
+                <Label fx:id="avatarLabel" maxHeight="57.0" prefHeight="57.0" prefWidth="48.0" style="-fx-background-color: #df521a; -fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold; -fx-background-radius: 50; -fx-min-width: 48; -fx-min-height: 48; -fx-max-width: 48; -fx-max-height: 48; -fx-alignment: center;" text="H" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" />
+                <Label fx:id="usernameLabel" style="-fx-font-weight: bold; -fx-font-size: 14;" text="Heba" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+               <font>
+                  <Font name="Baskerville Old Face" size="15.0" />
+               </font></Label>
+            </children>
+        </VBox>
+
+        <!-- LOYALTY + BALANCE WIDGET -->
+        <VBox alignment="CENTER_LEFT" spacing="6" style="-fx-background-color: #F5EFE6; -fx-background-radius: 10; -fx-padding: 10;" VBox.vgrow="NEVER">
+            <VBox.margin>
+                <Insets bottom="16.0" left="12.0" right="12.0" />
+            </VBox.margin>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="6">
+                    <Label text="⭐" />
+                    <Label fx:id="loyaltyLabel" style="-fx-font-weight: bold; -fx-font-size: 12;" text="640 pts" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" />
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="6">
+                    <Label text="💰" />
+                    <Label fx:id="balanceLabel" style="-fx-font-weight: bold; -fx-font-size: 12;" text="120.00" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" />
+                </HBox>
+            </children>
+        </VBox>
+
+        <!-- NAV BUTTONS -->
+        <VBox alignment="CENTER" spacing="8">
+            <VBox.margin>
+                <Insets left="15.0" right="15.0" />
+            </VBox.margin>
+            <children>
+                <Button maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #CBBFAF; -fx-background-radius: 8; -fx-font-weight: bold;" text="View Menu" onAction="#handleViewMenu">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+
+                <Button maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #CBBFAF; -fx-background-radius: 8; -fx-font-weight: bold;" text="View Tables" onAction="#handleViewTables">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+
+                <Button maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #CBBFAF; -fx-background-radius: 8; -fx-font-weight: bold;" text="Make Reservation" onAction="#handleMakeReservation">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+
+                <Button maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #CBBFAF; -fx-background-radius: 8; -fx-font-weight: bold;" text="Order" onAction="#handleOrder">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+
+        <!-- SPACER pushes Logout to bottom -->
+        <VBox VBox.vgrow="ALWAYS" />
+
+        <Button maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #df521a; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Logout" onAction="#handleLogout">
+            <VBox.margin>
+                <Insets top="30.0" />
+            </VBox.margin>
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Button>
+
+        <!-- SPACER pushes Logout to bottom -->
+        <VBox VBox.vgrow="ALWAYS" />
+
+        <Button maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #df521a; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Logout">
+            <VBox.margin>
+                <Insets top="30.0" />
+            </VBox.margin>
+         <font>
+            <Font size="17.0" />
+         </font>
+        </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+
+    </children>
+</VBox>
