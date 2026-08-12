@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gui.controllers.MenuController">
+
+   <top>
+    <VBox spacing="10"
+          style="-fx-padding: 10;">
+
+        <HBox spacing="20"
+              alignment="CENTER_LEFT">
+
+            <Label text="Menu Browsing"
+                   styleClass="title"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <ImageView fitWidth="140"
+                       fitHeight="80"
+                       preserveRatio="true">
+
+                <image>
+                    <Image url="@logo.jpeg"/>
+                </image>
+
+            </ImageView>
+
+        </HBox>
+
+        <HBox spacing="15">
+
+            <Label text="Category:"/>
+
+            <ComboBox fx:id="categoryFilter"
+                      promptText="All Categories"
+                      prefWidth="150"/>
+
+            <Button text="Filter"
+                    onAction="#filterMenu"/>
+
+        </HBox>
+
+    </VBox>
+</top>
+
+    <center>
+
+        <TableView fx:id="menuTable">
+
+            <columns>
+
+                <TableColumn fx:id="nameColumn"
+                             text="Name"
+                             prefWidth="150"/>
+
+                <TableColumn fx:id="descriptionColumn"
+                             text="Description"
+                             prefWidth="250"/>
+
+                <TableColumn fx:id="priceColumn"
+                             text="Price"
+                             prefWidth="100"/>
+
+                <TableColumn fx:id="categoryColumn"
+                             text="Category"
+                             prefWidth="150"/>
+
+                <TableColumn fx:id="availableColumn"
+                             text="Available"
+                             prefWidth="120"/>
+
+            </columns>
+
+        </TableView>
+
+    </center>
+
+    <bottom>
+
+        <HBox spacing="15"
+              alignment="CENTER_RIGHT"
+              style="-fx-padding: 15;">
+
+            <Label fx:id="feedbackLabel"
+                   styleClass="feedback"/>
+
+            <Label text="Order Total:"/>
+
+            <Label fx:id="totalLabel"
+                   text="0.0"/>
+
+            <Button fx:id="addButton"
+                    text="Add to Order"
+                    onAction="#addToOrder"/>
+
+            <Button fx:id="backButton"
+                    text="Back"/>
+
+        </HBox>
+
+    </bottom>
+
+</BorderPane>

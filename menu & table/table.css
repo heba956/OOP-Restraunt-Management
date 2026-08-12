@@ -1,0 +1,34 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+.root {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.button {
+    -fx-padding: 8 18;
+}
+
+.table-view {
+    -fx-pref-height: 300;
+}
+
+.title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.feedback {
+    -fx-font-size: 14px;
+}
