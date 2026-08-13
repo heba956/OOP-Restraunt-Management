@@ -1,3 +1,6 @@
+
+//dont use if not needed 
+
 package com.restaurant.restaurantsystem;
 
 import javafx.application.Application;
