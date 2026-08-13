@@ -1,0 +1,215 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+package projecttry1;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
+
+import enums.OrderStatus;
+import enums.PaymentMethod;
+import enums.PaymentStatus;
+import enums.ReservationStatus;
+import enums.TableStatus;
+import enums.TableType;
+/**
+ *
+ * @author malak
+ */
+public class Database {
+   // Customers
+    public static ArrayList<Customer> customers = new ArrayList<>();
+
+    // Staff (Admins and Waiters)
+    public static ArrayList<Staff> staffMembers = new ArrayList<>();
+
+    // Restaurant Tables
+    public static ArrayList<Table> tables = new ArrayList<>();
+
+    // Menu
+    public static ArrayList<MenuCategory> menuCategories = new ArrayList<>();
+    public static ArrayList<MenuItem> menuItems = new ArrayList<>();
+
+    // Reservations
+    public static ArrayList<Reservation> reservations = new ArrayList<>();
+
+    // Orders
+    public static ArrayList<Order> orders = new ArrayList<>();
+    public static ArrayList<OrderItem> orderItems = new ArrayList<>();
+
+    // Invoices
+    public static ArrayList<Invoice> invoices = new ArrayList<>();
+
+    // Initialize all dummy data
+    public static void initializeDatabase() {
+    initializeMenu();
+    initializeTables();
+    initializeCustomers();
+    initializeStaff();
+    initializeReservations();
+    initializeOrders();
+    initializeInvoices();
+    }
+
+    /**
+     * Returns a defensive copy of the current menu items so callers
+     * (e.g. background loading tasks) can't mutate the live database list.
+     */
+    public static List<MenuItem> getMenuItems() {
+        return new ArrayList<>(menuItems);
+    }
+
+private static void initializeMenu() {
+MenuCategory appetizers =
+            new MenuCategory("Appetizers", "Starters");
+
+    MenuCategory mainCourse =
+            new MenuCategory("Main Course", "Main meals");
+
+    MenuCategory beverages =
+            new MenuCategory("Beverages", "Drinks");
+
+    MenuCategory desserts =
+            new MenuCategory("Desserts", "Sweet dishes");
+
+    menuCategories.add(appetizers);
+    menuCategories.add(mainCourse);
+    menuCategories.add(beverages);
+    menuCategories.add(desserts);
+
+    menuItems.add(new MenuItem(
+            "Caesar Salad",
+            80,
+            "Fresh salad",
+            appetizers,
+            true));
+
+    menuItems.add(new MenuItem(
+            "Chicken Alfredo",
+            220,
+            "Creamy pasta",
+            mainCourse,
+            true));
+
+    menuItems.add(new MenuItem(
+            "Cola",
+            35,
+            "Soft drink",
+            beverages,
+            true));
+
+    menuItems.add(new MenuItem(
+            "Chocolate Cake",
+            90,
+            "Rich chocolate cake",
+            desserts,
+            true));
+
+}
+    private static void initializeStaff() {
+
+        staffMembers.add(new Admin(
+            "admin",
+            "admin123",
+            40,
+            new Date()));
+
+    staffMembers.add(new Waiter(
+            "ahmed",
+            "waiter123",
+            48,
+            new Date()));
+
+    }
+
+    private static void initializeCustomers() {
+         customers.add(new Customer(
+            "malak",
+            "123456",
+            LocalDate.of(2006,10,26),
+            1000,
+            "01012345678",
+            "Vegetarian"));
+
+    customers.add(new Customer(
+            "alex",
+            "abcdef",
+            LocalDate.of(2005,5,14),
+            600,
+            "01198765432",
+            "No allergies"));
+
+    }
+
+    private static void initializeTables() {
+  tables.add(new Table(
+            1,
+            2,
+            TableType.INDOOR,
+            TableStatus.AVAILABLE));
+
+    tables.add(new Table(
+            2,
+            4,
+            TableType.OUTDOOR,
+            TableStatus.AVAILABLE));
+
+    tables.add(new Table(
+            3,
+            6,
+            TableType.VIP,
+            TableStatus.RESERVED));
+
+    tables.add(new Table(
+            4,
+            8,
+            TableType.INDOOR,
+            TableStatus.AVAILABLE));
+    
+
+    }
+
+   
+
+    private static void initializeReservations() {
+     
+ Reservation reservation =
+            new Reservation(
+                    customers.get(0),
+                    tables.get(2),
+                    LocalDateTime.now().plusDays(1),
+                    4);
+
+    reservation.setStatus(ReservationStatus.ACTIVE);
+
+    reservations.add(reservation);
+    }
+
+    private static void initializeOrders() {
+  Order order =
+            new Order(
+                    tables.get(2),
+                    customers.get(0));
+
+    order.addItem(menuItems.get(1),2,"No mushrooms");
+    order.addItem(menuItems.get(2),2,"");
+
+    orders.add(order);
+
+    orderItems.addAll(order.getItems());
+    }
+
+    private static void initializeInvoices() {
+Invoice invoice =
+            new Invoice(1, orders.get(0));
+
+    invoice.payInvoice(PaymentMethod.CASH);
+
+    invoices.add(invoice);
+    }
+
+}
