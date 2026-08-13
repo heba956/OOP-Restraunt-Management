@@ -1,0 +1,136 @@
+package gui.controllers;
+
+import javafx.collections.FXCollections;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import model.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class MenuController {
+
+    @FXML private ComboBox<String> categoryFilter;
+    @FXML private TableView<MenuItem> menuTable;
+    @FXML private TableColumn<MenuItem, String> nameColumn;
+    @FXML private TableColumn<MenuItem, String> descriptionColumn;
+    @FXML private TableColumn<MenuItem, Number> priceColumn;
+    @FXML private TableColumn<MenuItem, String> categoryColumn;
+    @FXML private TableColumn<MenuItem, Boolean> availableColumn;
+    @FXML private Label feedbackLabel;
+    @FXML private Label totalLabel;
+    @FXML private Button addButton;
+    @FXML private Button backButton;
+    @FXML private ProgressIndicator loadingSpinner; 
+
+    private List<MenuItem> orderItems;
+    private double orderTotal = 0.0;
+    private List<MenuItem> allItems;
+
+    private final ExecutorService executor =
+            Executors.newSingleThreadExecutor(r -> {
+                Thread t = new Thread(r, "menu-loader");
+                t.setDaemon(true);
+                return t;
+            });
+
+    @FXML
+    public void initialize() {
+
+        categoryFilter.getItems().addAll(
+                "All", "Appetizers", "Main Course", "Desserts", "Drinks"
+        );
+        categoryFilter.setValue("All");
+
+        nameColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getName()));
+        descriptionColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getDescription()));
+        priceColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleDoubleProperty(data.getValue().getPrice()));
+        categoryColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getCategory().getCategoryName()));
+        availableColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleBooleanProperty(data.getValue().isAvailable()));
+
+        orderItems = new ArrayList<>();
+        totalLabel.setText("0.0");
+
+        loadMenuAsync();
+    }
+
+    private void loadMenuAsync() {
+
+        loadingSpinner.setVisible(true);
+        menuTable.setDisable(true);
+        addButton.setDisable(true);
+        feedbackLabel.setText("Loading menu…");
+
+        MenuLoadTask task = new MenuLoadTask();
+
+        task.setOnSucceeded((WorkerStateEvent e) -> {
+            allItems = task.getValue();
+            showMenu(allItems);
+            loadingSpinner.setVisible(false);
+            menuTable.setDisable(false);
+            addButton.setDisable(false);
+        });
+
+        task.setOnFailed((WorkerStateEvent e) -> {
+            loadingSpinner.setVisible(false);
+            menuTable.setDisable(false);
+            addButton.setDisable(false);
+            Throwable ex = task.getException();
+            feedbackLabel.setText("Couldn't load menu, please try again.");
+            if (ex != null) ex.printStackTrace();
+        });
+
+        executor.submit(task);
+    }
+
+    private void showMenu(List<MenuItem> items) {
+        menuTable.setItems(FXCollections.observableArrayList(items));
+        feedbackLabel.setText(items.size() + " item(s) found.");
+    }
+
+    @FXML
+    private void filterMenu() {
+        if (allItems == null) return; 
+
+        String selectedCategory = categoryFilter.getValue();
+        List<MenuItem> filteredItems = new ArrayList<>();
+
+        for (MenuItem item : allItems) {
+            boolean categoryMatch = selectedCategory.equals("All") ||
+                    item.getCategory().getCategoryName().equals(selectedCategory);
+            if (categoryMatch) filteredItems.add(item);
+        }
+        showMenu(filteredItems);
+    }
+
+    @FXML
+    private void addToOrder() {
+        MenuItem selectedItem = menuTable.getSelectionModel().getSelectedItem();
+
+        if (selectedItem == null) {
+            feedbackLabel.setText("Please select an item first.");
+            return;
+        }
+        if (!selectedItem.isAvailable()) {
+            feedbackLabel.setText("This item is not available.");
+            return;
+        }
+
+        orderItems.add(selectedItem);
+        orderTotal += selectedItem.getPrice();
+        totalLabel.setText(String.valueOf(orderTotal));
+        feedbackLabel.setText(selectedItem.getName() + " added to order.");
+    }
+
+    public void shutdown() {
+        executor.shutdownNow();
+    }
+}
