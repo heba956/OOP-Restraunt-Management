@@ -1,0 +1,123 @@
+package gui.controllers;
+
+import enums.TableLocation;
+import enums.TableStatus;
+import gui.tasks.TableAvailabilityService;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.util.Duration;
+import model.RestaurantTable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TableController {
+
+    @FXML private ComboBox<String> locationFilter;
+    @FXML private ComboBox<Integer> capacityFilter;
+    @FXML private ComboBox<String> timeFilter;
+    @FXML private TableView<RestaurantTable> tableView;
+    @FXML private TableColumn<RestaurantTable, Number> numberColumn;
+    @FXML private TableColumn<RestaurantTable, Number> capacityColumn;
+    @FXML private TableColumn<RestaurantTable, String> locationColumn;
+    @FXML private TableColumn<RestaurantTable, String> timeColumn;
+    @FXML private TableColumn<RestaurantTable, String> statusColumn;
+    @FXML private Label feedbackLabel;
+
+    private List<RestaurantTable> allTables;
+
+    private final TableAvailabilityService tableService = new TableAvailabilityService();
+
+    @FXML
+    public void initialize() {
+
+        locationFilter.getItems().addAll("All", "INDOOR", "OUTDOOR", "VIP");
+        capacityFilter.getItems().addAll(2, 4, 6, 8);
+        timeFilter.getItems().addAll(
+                "All", "12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM", "8:00 PM"
+        );
+
+        locationFilter.setValue("All");
+        timeFilter.setValue("All");
+
+        numberColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleIntegerProperty(data.getValue().getTableNumber()));
+        capacityColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleIntegerProperty(data.getValue().getCapacity()));
+        locationColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getLocation().toString()));
+        statusColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getStatus().toString()));
+        timeColumn.setCellValueFactory(data ->
+                new javafx.beans.property.SimpleStringProperty(data.getValue().getTimeSlot()));
+
+        startAvailabilityPolling();
+    }
+
+    private void startAvailabilityPolling() {
+
+        tableService.setPeriod(Duration.seconds(5));
+
+        tableService.setOnSucceeded(event -> {
+            // Guaranteed back on the FX thread — no Platform.runLater needed
+            allTables = tableService.getValue();
+            applyCurrentFilters(); // re-apply filters instead of overwriting the view blindly
+        });
+
+        tableService.setOnFailed(event -> {
+            Throwable ex = tableService.getException();
+            feedbackLabel.setText("Couldn't refresh table availability.");
+            if (ex != null) ex.printStackTrace();
+        });
+
+        tableService.start();
+    }
+
+    private void showTables(List<RestaurantTable> tables) {
+        tableView.setItems(FXCollections.observableArrayList(tables));
+        feedbackLabel.setText(tables.size() + " table(s) found.");
+    }
+
+    @FXML
+    private void filterTables() {
+        applyCurrentFilters();
+    }
+
+    private void applyCurrentFilters() {
+
+        if (allTables == null) return; // first poll hasn't landed yet
+
+        String selectedLocation = locationFilter.getValue();
+        Integer selectedCapacity = capacityFilter.getValue();
+        String selectedTime = timeFilter.getValue();
+
+        List<RestaurantTable> filteredTables = new ArrayList<>();
+
+        for (RestaurantTable table : allTables) {
+
+            boolean locationMatch =
+                    selectedLocation.equals("All") ||
+                    table.getLocation().toString().equals(selectedLocation);
+
+            boolean capacityMatch =
+                    selectedCapacity == null ||
+                    table.getCapacity() == selectedCapacity;
+
+            boolean timeMatch =
+                    selectedTime.equals("All") ||
+                    table.getTimeSlot().equals(selectedTime);
+
+            if (locationMatch && capacityMatch && timeMatch) {
+                filteredTables.add(table);
+            }
+        }
+
+        showTables(filteredTables);
+    }
+
+    /** Call this when navigating away from the Table Browsing screen. */
+    public void stopPolling() {
+        tableService.cancel();
+    }
+}
