@@ -1,0 +1,102 @@
+/* =========================
+   MAIN SCREEN
+   ========================= */
+
+.root {
+    -fx-background-color: #f5f5f5;
+    -fx-padding: 30px;
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+.checkout-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================
+   INVOICE
+   ========================= */
+
+.invoice-number {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.invoice-grid {
+    -fx-background-color: white;
+    -fx-padding: 20px;
+    -fx-background-radius: 10px;
+}
+
+
+/* =========================
+   INVOICE LABELS
+   ========================= */
+
+.invoice-label {
+    -fx-font-size: 15px;
+}
+
+.invoice-value {
+    -fx-font-size: 15px;
+}
+
+
+/* =========================
+   TOTAL
+   ========================= */
+
+.total-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.total-value {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================
+   PAYMENT SECTION
+   ========================= */
+
+.payment-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================
+   RADIO BUTTONS
+   ========================= */
+
+.payment-option {
+    -fx-font-size: 15px;
+}
+
+
+/* =========================
+   CONFIRM BUTTON
+   ========================= */
+
+.confirm-button {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 25px;
+}
+
+
+/* =========================
+   PAYMENT STATUS
+   ========================= */
+
+.payment-status {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
