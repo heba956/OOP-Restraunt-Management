@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #f8f9fa;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="projecttry1.TableController">
+
+    <top>
+        <VBox spacing="12" style="-fx-padding: 20; -fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 4, 0, 0, 1);">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="12">
+                            <children>
+                                <ImageView fitHeight="40" fitWidth="100" preserveRatio="true">
+                                    <image><Image url="@logo.jpeg" /></image>
+                                </ImageView>
+                                <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Restaurant Table Availability" />
+                            </children>
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button onAction="#handleBack" styleClass="secondary-button" text="Back to Dashboard" />
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <children>
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 13px;" text="Location:" />
+                        <ComboBox fx:id="locationFilter" prefWidth="130.0" promptText="All" styleClass="combo-box" />
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 13px;" text="Capacity:" />
+                        <ComboBox fx:id="capacityFilter" prefWidth="130.0" promptText="All" styleClass="combo-box" />
+
+                        <Label style="-fx-font-weight: bold; -fx-font-size: 13px;" text="Time Slot:" />
+                        <ComboBox fx:id="timeFilter" prefWidth="140.0" promptText="All" styleClass="combo-box" />
+
+                        <Button onAction="#filterTables" styleClass="primary-button" text="Filter" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10" style="-fx-padding: 15;">
+            <children>
+                <TableView fx:id="tableView" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="numberColumn" prefWidth="120.0" text="Table #" />
+                        <TableColumn fx:id="capacityColumn" prefWidth="140.0" text="Seats Capacity" />
+                        <TableColumn fx:id="locationColumn" prefWidth="160.0" text="Location Type" />
+                        <TableColumn fx:id="statusColumn" prefWidth="160.0" text="Current Status" />
+                        <TableColumn fx:id="timeColumn" prefWidth="160.0" text="Time Slot" />
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="15" style="-fx-padding: 15; -fx-background-color: white;">
+            <children>
+                <Label fx:id="feedbackLabel" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #2980b9;" text="Select options to filter tables." />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleBack" styleClass="secondary-button" text="Back" />
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>

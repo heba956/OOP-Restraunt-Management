@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="620.0" prefWidth="700.0" spacing="16.0" style="-fx-background-color: #f8f9fa;"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projecttry1.CustDashboardController">
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <ImageView fitHeight="45" fitWidth="115" preserveRatio="true">
+                <image><Image url="@logo.jpeg" /></image>
+            </ImageView>
+            <Label text="Restaurant Dashboard" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+        </HBox>
+
+        <!-- PROFILE WIDGET -->
+        <VBox alignment="CENTER" spacing="6.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 8, 0, 0, 2);">
+            <children>
+                <Label fx:id="avatarLabel" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold; -fx-background-radius: 40; -fx-min-width: 54; -fx-min-height: 54; -fx-alignment: center;" text="C" />
+                <Label fx:id="usernameLabel" style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #2c3e50;" text="Customer Name" />
+            </children>
+        </VBox>
+
+        <!-- LOYALTY + BALANCE WIDGET -->
+        <HBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #fef5ec; -fx-background-radius: 12; -fx-padding: 14;">
+            <children>
+                <HBox alignment="CENTER" spacing="8.0">
+                    <Label text="⭐" style="-fx-font-size: 16px;" />
+                    <Label text="Loyalty:" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #7f8c8d;" />
+                    <Label fx:id="loyaltyLabel" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #d35400;" text="0 pts" />
+                </HBox>
+                <Label text="|" style="-fx-text-fill: #bdc3c7;" />
+                <HBox alignment="CENTER" spacing="8.0">
+                    <Label text="💳" style="-fx-font-size: 16px;" />
+                    <Label text="Balance:" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #7f8c8d;" />
+                    <Label fx:id="balanceLabel" style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #27ae60;" text="0.00" />
+                </HBox>
+            </children>
+        </HBox>
+
+        <!-- LIVE ORDER STATUS TRACKER -->
+        <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 16; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="🍳 Active Order Status" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="orderIdLabel" text="Order #1" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #7f8c8d;" />
+                    </children>
+                </HBox>
+
+                <!-- STATUS PROGRESS STEPS -->
+                <HBox alignment="CENTER" spacing="8.0" style="-fx-background-color: #f8f9fa; -fx-background-radius: 8; -fx-padding: 10;">
+                    <children>
+                        <Label fx:id="stepPlaced" text="1. TO BE PLACED" style="-fx-padding: 5 10; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #ecf0f1; -fx-text-fill: #7f8c8d;" />
+                        <Label text="➔" style="-fx-text-fill: #bdc3c7; -fx-font-weight: bold;" />
+                        <Label fx:id="stepPreparing" text="2. PREPARING" style="-fx-padding: 5 10; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #ecf0f1; -fx-text-fill: #7f8c8d;" />
+                        <Label text="➔" style="-fx-text-fill: #bdc3c7; -fx-font-weight: bold;" />
+                        <Label fx:id="stepServed" text="3. SERVED" style="-fx-padding: 5 10; -fx-background-radius: 12; -fx-font-weight: bold; -fx-font-size: 12px; -fx-background-color: #ecf0f1; -fx-text-fill: #7f8c8d;" />
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER" spacing="12.0">
+                    <children>
+                        <Label fx:id="statusDetailLabel" text="Status: PLACED - Kitchen has received your order." style="-fx-font-size: 13px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
+                        <Button fx:id="advanceStatusBtn" text="▶ Next Status" onAction="#handleAdvanceStatus" styleClass="secondary-button" style="-fx-font-size: 12px; -fx-padding: 4 10;" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+        <!-- NAVIGATION BUTTONS CARD -->
+        <VBox alignment="CENTER" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 24; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);" VBox.vgrow="ALWAYS">
+            <children>
+                <Button maxWidth="Infinity" styleClass="secondary-button" style="-fx-font-size: 15px; -fx-pref-height: 42px;" text="📖  View &amp; Order Menu" onAction="#handleViewMenu" />
+                <Button maxWidth="Infinity" styleClass="secondary-button" style="-fx-font-size: 15px; -fx-pref-height: 42px;" text="🪑  Browse Tables" onAction="#handleViewTables" />
+                <Button maxWidth="Infinity" styleClass="secondary-button" style="-fx-font-size: 15px; -fx-pref-height: 42px;" text="📅  Make a Reservation" onAction="#handleMakeReservation" />
+                <Button maxWidth="Infinity" styleClass="secondary-button" style="-fx-font-size: 15px; -fx-pref-height: 42px;" text="🛒  Checkout / Pay Invoice" onAction="#handleCheckout" />
+            </children>
+        </VBox>
+
+        <!-- LOGOUT BUTTON -->
+        <Button maxWidth="Infinity" styleClass="danger-button" style="-fx-font-size: 15px; -fx-pref-height: 42px;" text="🚪  Logout" onAction="#handleLogout" />
+    </children>
+</VBox>

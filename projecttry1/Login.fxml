@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="14.0" styleClass="card-container"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projecttry1.LoginController"
+      prefWidth="450.0" prefHeight="500.0">
+   <padding>
+      <Insets bottom="35.0" left="40.0" right="40.0" top="35.0" />
+   </padding>
+   <children>
+      <ImageView fitHeight="60" fitWidth="150" preserveRatio="true">
+         <image><Image url="@logo.jpeg" /></image>
+      </ImageView>
+      <Label text="Welcome Back" styleClass="header-label" />
+      
+      <VBox spacing="6.0" alignment="CENTER_LEFT" maxWidth="320.0">
+          <Label text="Username" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+          <TextField fx:id="usernameField" promptText="Enter your username" maxWidth="320.0" styleClass="text-field" />
+      </VBox>
+
+      <VBox spacing="6.0" alignment="CENTER_LEFT" maxWidth="320.0">
+          <Label text="Password" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+          <PasswordField fx:id="passwordField" promptText="Enter your password" maxWidth="320.0" styleClass="password-field" />
+      </VBox>
+
+      <Button text="Log In" onAction="#handleLogin" defaultButton="true" maxWidth="320.0" styleClass="primary-button" />
+      <Label fx:id="messageLabel" wrapText="true" maxWidth="320.0" alignment="CENTER" />
+      <Hyperlink text="Don't have an account? Register here" onAction="#goToRegister" style="-fx-font-size: 13px; -fx-text-fill: #e67e22;" />
+   </children>
+</VBox>
