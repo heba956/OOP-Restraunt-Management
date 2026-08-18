@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="820.0" spacing="14.0"
+      style="-fx-background-color: #f0f2f5;"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projecttry1.AdminDashboardController">
+   <padding>
+      <Insets bottom="24.0" left="36.0" right="36.0" top="24.0" />
+   </padding>
+   <children>
+
+      <!-- Header -->
+      <HBox alignment="CENTER_LEFT" spacing="12">
+         <ImageView fitHeight="45" fitWidth="115" preserveRatio="true">
+            <image><Image url="@logo.jpeg" /></image>
+         </ImageView>
+         <VBox spacing="2.0">
+            <Label text="Admin Dashboard" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+            <Label fx:id="welcomeLabel" text="Welcome, Admin"
+                   style="-fx-font-size: 13px; -fx-text-fill: #7f8c8d;" />
+         </VBox>
+         <Region HBox.hgrow="ALWAYS" />
+         <Label text="👑 ADMIN" style="-fx-background-color: #2c3e50; -fx-text-fill: white;
+                -fx-padding: 4 14; -fx-background-radius: 20; -fx-font-weight: bold; -fx-font-size: 11px;" />
+      </HBox>
+
+      <!-- Stats row -->
+      <HBox spacing="12.0">
+         <VBox alignment="CENTER" spacing="4.0" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <Label fx:id="statCustomers" text="0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #e67e22;" />
+            <Label text="Customers" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+         </VBox>
+         <VBox alignment="CENTER" spacing="4.0" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <Label fx:id="statOrders" text="0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #3498db;" />
+            <Label text="Orders" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+         </VBox>
+         <VBox alignment="CENTER" spacing="4.0" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <Label fx:id="statMenuItems" text="0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #27ae60;" />
+            <Label text="Menu Items" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+         </VBox>
+         <VBox alignment="CENTER" spacing="4.0" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 14;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <Label fx:id="statReservations" text="0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #9b59b6;" />
+            <Label text="Reservations" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+         </VBox>
+      </HBox>
+
+      <!-- All Orders table -->
+      <VBox spacing="8.0" VBox.vgrow="ALWAYS"
+            style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 16;
+                   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+         <Label text="📋 All Orders" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+         <TableView fx:id="ordersTable" VBox.vgrow="ALWAYS">
+            <columns>
+               <TableColumn fx:id="colOrderId"       text="Order #"    prefWidth="70"  />
+               <TableColumn fx:id="colOrderCustomer" text="Customer"   prefWidth="130" />
+               <TableColumn fx:id="colOrderTable"    text="Table"      prefWidth="80"  />
+               <TableColumn fx:id="colOrderStatus"   text="Status"     prefWidth="110" />
+               <TableColumn fx:id="colOrderTotal"    text="Total ($)"  prefWidth="100" />
+            </columns>
+         </TableView>
+      </VBox>
+
+      <!-- View buttons -->
+      <HBox spacing="10.0">
+         <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="secondary-button"
+                 style="-fx-pref-height: 38px;" text="👥 View Customers"
+                 onAction="#handleViewCustomers" />
+         <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="secondary-button"
+                 style="-fx-pref-height: 38px;" text="🪑 View Tables"
+                 onAction="#handleViewTables" />
+         <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="secondary-button"
+                 style="-fx-pref-height: 38px;" text="📅 View Reservations"
+                 onAction="#handleViewReservations" />
+      </HBox>
+
+      <!-- Manage buttons -->
+      <HBox spacing="10.0">
+         <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="primary-button"
+                 style="-fx-pref-height: 38px;" text="🍽️ Manage Menu"
+                 onAction="#handleManageMenu" />
+         <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="primary-button"
+                 style="-fx-pref-height: 38px;" text="📂 Manage Categories"
+                 onAction="#handleManageCategories" />
+         <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="primary-button"
+                 style="-fx-pref-height: 38px;" text="🪑 Manage Tables"
+                 onAction="#handleManageTables" />
+         <Button maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="danger-button"
+                 style="-fx-pref-height: 38px;" text="🚪 Logout"
+                 onAction="#handleLogout" />
+      </HBox>
+
+   </children>
+</VBox>

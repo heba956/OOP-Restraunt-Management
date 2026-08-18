@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="14.0" styleClass="card-container"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projecttry1.StaffLoginController"
+      prefWidth="450.0" prefHeight="520.0">
+   <padding>
+      <Insets bottom="35.0" left="40.0" right="40.0" top="35.0" />
+   </padding>
+   <children>
+      <ImageView fitHeight="60" fitWidth="150" preserveRatio="true">
+         <image><Image url="@logo.jpeg" /></image>
+      </ImageView>
+
+      <VBox alignment="CENTER" spacing="4.0">
+         <Label text="Staff Portal" styleClass="header-label" />
+         <Label text="Sign in with your staff credentials" style="-fx-font-size: 13px; -fx-text-fill: #7f8c8d;" />
+      </VBox>
+
+      <!-- Role badge row -->
+      <HBox alignment="CENTER" spacing="12.0" style="-fx-padding: 8 0 4 0;">
+         <Label fx:id="adminBadge" text="👑  Admin"
+                style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-padding: 5 16; -fx-background-radius: 20; -fx-font-weight: bold; -fx-font-size: 12px; -fx-cursor: hand;" />
+         <Label fx:id="waiterBadge" text="🍽️  Waiter"
+                style="-fx-background-color: #ecf0f1; -fx-text-fill: #7f8c8d; -fx-padding: 5 16; -fx-background-radius: 20; -fx-font-weight: bold; -fx-font-size: 12px; -fx-cursor: hand;" />
+      </HBox>
+
+      <VBox spacing="6.0" alignment="CENTER_LEFT" maxWidth="320.0">
+          <Label text="Username" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+          <TextField fx:id="usernameField" promptText="Staff username" maxWidth="320.0" styleClass="text-field" />
+      </VBox>
+
+      <VBox spacing="6.0" alignment="CENTER_LEFT" maxWidth="320.0">
+          <Label text="Password" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+          <PasswordField fx:id="passwordField" promptText="Staff password" maxWidth="320.0" styleClass="password-field" />
+      </VBox>
+
+      <Button text="Sign In as Staff" onAction="#handleStaffLogin" defaultButton="true"
+              maxWidth="320.0" styleClass="primary-button"
+              style="-fx-background-color: #2c3e50; -fx-pref-height: 42px; -fx-font-size: 14px;" />
+      <Label fx:id="messageLabel" wrapText="true" maxWidth="320.0" alignment="CENTER" />
+      <Hyperlink text="← Back to Customer Login" onAction="#goToCustomerLogin"
+                 style="-fx-font-size: 13px; -fx-text-fill: #7f8c8d;" />
+   </children>
+</VBox>

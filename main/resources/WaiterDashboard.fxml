@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="820.0" spacing="14.0"
+      style="-fx-background-color: #f0f2f5;"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projecttry1.WaiterDashboardController">
+   <padding>
+      <Insets bottom="24.0" left="36.0" right="36.0" top="24.0" />
+   </padding>
+   <children>
+
+      <!-- Header -->
+      <HBox alignment="CENTER_LEFT" spacing="12">
+         <ImageView fitHeight="45" fitWidth="115" preserveRatio="true">
+            <image><Image url="@logo.jpeg" /></image>
+         </ImageView>
+         <VBox spacing="2.0">
+            <Label text="Waiter Dashboard" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+            <Label fx:id="welcomeLabel" text="Welcome, Waiter"
+                   style="-fx-font-size: 13px; -fx-text-fill: #7f8c8d;" />
+         </VBox>
+         <Region HBox.hgrow="ALWAYS" />
+         <Button text="📝 Take New Order" styleClass="primary-button"
+                 style="-fx-font-size: 13px; -fx-pref-height: 36px;" onAction="#handleTakeOrder" />
+         <Label text="🍽️ WAITER" style="-fx-background-color: #e67e22; -fx-text-fill: white;
+                -fx-padding: 4 14; -fx-background-radius: 20; -fx-font-weight: bold; -fx-font-size: 11px;" />
+      </HBox>
+
+      <!-- Orders panel -->
+      <VBox spacing="10.0" VBox.vgrow="ALWAYS"
+            style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 16;
+                   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+
+         <HBox alignment="CENTER_LEFT">
+            <Label text="📋 Active Orders" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+            <Region HBox.hgrow="ALWAYS" />
+         </HBox>
+
+         <TableView fx:id="ordersTable" VBox.vgrow="ALWAYS">
+            <columns>
+               <TableColumn fx:id="colOrderId"       text="Order #"   prefWidth="70"  />
+               <TableColumn fx:id="colCustomer"      text="Customer"  prefWidth="130" />
+               <TableColumn fx:id="colTable"         text="Table"     prefWidth="80"  />
+               <TableColumn fx:id="colStatus"        text="Status"    prefWidth="120" />
+               <TableColumn fx:id="colTotal"         text="Total ($)" prefWidth="100" />
+            </columns>
+         </TableView>
+
+         <!-- Update status row -->
+         <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-padding: 6 0 0 0;">
+            <Label text="Update selected order status:" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
+            <ComboBox fx:id="statusComboBox" promptText="Choose status" prefWidth="160" />
+            <Button text="Apply" styleClass="primary-button" onAction="#handleUpdateStatus"
+                    style="-fx-pref-height: 36px; -fx-font-size: 13px;" />
+            <Label fx:id="feedbackLabel" style="-fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-font-size: 12px;" />
+         </HBox>
+      </VBox>
+
+      <!-- Tables panel -->
+      <VBox spacing="8.0"
+            style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 16;
+                   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+         <Label text="🪑 All Tables" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+         <TableView fx:id="tablesTable" prefHeight="150.0">
+            <columns>
+               <TableColumn fx:id="colTableNum"    text="#"          prefWidth="50"  />
+               <TableColumn fx:id="colTableType"   text="Type"       prefWidth="100" />
+               <TableColumn fx:id="colTableCap"    text="Capacity"   prefWidth="90"  />
+               <TableColumn fx:id="colTableStatus" text="Status"     prefWidth="120" />
+            </columns>
+         </TableView>
+
+         <!-- Table assign/unassign row -->
+         <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-padding: 4 0 0 0;">
+            <Label text="Selected table:" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
+            <Button text="✅  Assign (Occupied)" onAction="#handleAssignTable"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;
+                           -fx-background-radius: 7; -fx-pref-height: 36px; -fx-font-size: 13px; -fx-cursor: hand;" />
+            <Button text="❌  Unassign (Available)" onAction="#handleUnassignTable"
+                    style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;
+                           -fx-background-radius: 7; -fx-pref-height: 36px; -fx-font-size: 13px; -fx-cursor: hand;" />
+            <Label fx:id="tableFeedbackLabel" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+         </HBox>
+      </VBox>
+
+      <!-- Logout -->
+      <Button maxWidth="Infinity" styleClass="danger-button"
+              style="-fx-pref-height: 40px;" text="🚪 Logout"
+              onAction="#handleLogout" />
+
+   </children>
+</VBox>

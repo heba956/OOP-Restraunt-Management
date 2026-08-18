@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="680.0" prefWidth="860.0" spacing="14.0"
+      style="-fx-background-color: #f0f2f5;"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projecttry1.AdminViewReservationsController">
+   <padding>
+      <Insets bottom="24.0" left="30.0" right="30.0" top="24.0" />
+   </padding>
+   <children>
+
+      <!-- Header -->
+      <HBox alignment="CENTER_LEFT" spacing="12">
+         <ImageView fitHeight="40" fitWidth="100" preserveRatio="true">
+            <image><Image url="@logo.jpeg" /></image>
+         </ImageView>
+         <VBox spacing="2.0">
+            <Label text="📅 Table Reservations"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+            <Label text="Overview of all customer reservations."
+                   style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+         </VBox>
+         <Region HBox.hgrow="ALWAYS" />
+         <Button text="← Back to Dashboard" styleClass="secondary-button" onAction="#handleBack" />
+      </HBox>
+
+      <!-- Stats row -->
+      <HBox spacing="12.0">
+         <VBox alignment="CENTER" spacing="4.0" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 12;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <Label fx:id="totalResLabel" text="0"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #9b59b6;" />
+            <Label text="Total Reservations" style="-fx-font-size: 11px; -fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+         </VBox>
+         <VBox alignment="CENTER" spacing="4.0" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 12;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <Label fx:id="activeResLabel" text="0"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #27ae60;" />
+            <Label text="Active" style="-fx-font-size: 11px; -fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+         </VBox>
+         <VBox alignment="CENTER" spacing="4.0" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 12;
+                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+            <Label fx:id="cancelledResLabel" text="0"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;" />
+            <Label text="Cancelled" style="-fx-font-size: 11px; -fx-text-fill: #7f8c8d; -fx-font-weight: bold;" />
+         </VBox>
+      </HBox>
+
+      <!-- Reservations Table -->
+      <VBox spacing="8.0" VBox.vgrow="ALWAYS"
+            style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 16;
+                   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 6, 0, 0, 2);">
+         <Label text="📋 Reservation List"
+                style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+
+         <TableView fx:id="reservationTable" VBox.vgrow="ALWAYS">
+            <columns>
+               <TableColumn fx:id="colCustomer"  text="Customer"   prefWidth="160" />
+               <TableColumn fx:id="colTableNum"  text="Table #"    prefWidth="90"  />
+               <TableColumn fx:id="colDateTime"  text="Date &amp; Time" prefWidth="200" />
+               <TableColumn fx:id="colPartySize" text="Party Size" prefWidth="100" />
+               <TableColumn fx:id="colStatus"    text="Status"     prefWidth="130" />
+            </columns>
+         </TableView>
+      </VBox>
+
+   </children>
+</VBox>
